@@ -35,7 +35,7 @@ MASK_COLOUR = 0
 
 LOW_GREEN_VAL = 0.0001
 
-# number of pixels per meter
+# number of pixels per meter aka resolution
 M_PER_PIXEL = 30
 
 # do we want to print images
@@ -166,6 +166,8 @@ def get_img_size(long_min, lat_min, long_max, lat_max):
     """ Given a bounding box of lat and long coords calculates
     the image size in pixels required to encompass the area """
 
+    assert pgConn, "get_img_size(): Must have a Postgres connection!"
+
     def get_dist_from_pts(a, b):
         """ Queries the database to ge the distance in m between 
         2 lat long points """
@@ -272,6 +274,7 @@ def get_cities(location, num_cities=10):
     records = pgConn.performSelect(select_query)
     log("Fetched", len(records), location, "records")
     return records
+
 
 def main(location):
     global pgConn
