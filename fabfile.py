@@ -211,7 +211,6 @@ def run_start(ncities='10'):
     """
     execute(check_lock)
     deploy()
-    ncities = '1'
     with cd(deploy_path):
         run('python mq_calc.py -c '+ncities)
 
@@ -265,7 +264,7 @@ def run_results():
 
 def all(ncities=10):
 
-    execute(run_start)
-    execute(run_workers)#(ncities=10)
+    execute(run_start, ncities)
+    execute(run_workers)
     execute(run_results)
 
